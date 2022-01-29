@@ -10,8 +10,6 @@ do
 
     sed -i "s~serverurl~${VUE_APP_SERVER_URL}~g" $file
 
-    sed -n '$p' $file
-
 done
 
 echo "Starting nginx"

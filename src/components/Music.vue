@@ -81,7 +81,8 @@ export default defineComponent({
             margin: 1rem;
             color: colors.$dark-primary-color;
             max-width: 100%;
-            word-break: break-all;
+            text-overflow: ellipsis;
+            overflow: hidden;
             text-align: center;
             user-select: none;
             cursor: pointer;
@@ -91,10 +92,65 @@ export default defineComponent({
             font-style: italic;
             text-align: center;
             margin: 0.5rem;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         &__thumbnail {
+            width: calc(50vw - 4rem);
             user-select: none;
+        }
+    }
+}
+@media screen and (max-width: 960px) {
+    .musics {
+        .music {
+            width: 60vw;
+            margin-left: 20vw;
+            &__title {
+            }
+
+            &__artist {
+            }
+
+            &__thumbnail {
+                width: calc(60vw - 4rem);
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .musics {
+        .music {
+            width: 70vw;
+            margin-left: 15vw;
+            &__title {
+            }
+
+            &__artist {
+                width: calc(70vw - 4rem);
+            }
+
+            &__thumbnail {
+                width: calc(70vw - 4rem);
+            }
+        }
+    }
+}
+@media screen and (max-width: 350px) {
+    .musics {
+        .music {
+            width: 80vw;
+            margin-left: 10vw;
+            &__title {
+            }
+
+            &__artist {
+            }
+
+            &__thumbnail {
+                width: calc(80vw - 4rem);
+            }
         }
     }
 }

@@ -38,4 +38,22 @@ export default defineComponent({
     background-color: colors.$dark-main-background;
     color: colors.$dark-text-color;
 }
+html {
+    font-size: 16px;
+}
+@media screen and (max-width: 960px) {
+    html {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 768px) {
+    html {
+        font-size: 13px;
+    }
+}
+@media screen and (max-width: 410px) {
+    html {
+        font-size: 11.5px;
+    }
+}
 </style>
