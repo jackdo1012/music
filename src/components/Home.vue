@@ -88,13 +88,11 @@ export default defineComponent({
 
         const handleStateChange = (data: IIframeData): void => {
             if (data.data === 0) {
-                musicIndex.value = (musicIndex.value + 1) % musics.value.length;
+                const now = musicIndex.value;
+                const next = (now + 1) % musics.value.length;
+                musicIndex.value = next;
                 player.value &&
-                    player.value.loadVideoById(
-                        musics.value[
-                            (musicIndex.value + 1) % musics.value.length
-                        ].vidId,
-                    );
+                    player.value.loadVideoById(musics.value[next].vidId);
             }
         };
         axios
