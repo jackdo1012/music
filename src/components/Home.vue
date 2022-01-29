@@ -12,10 +12,9 @@
                 </div>
                 <youtube-iframe
                     class="player__iframe"
-                    v-if="musics[musicIndex] !== undefined"
-                    :video-id="musics[musicIndex].vidId"
+                    v-if="musics[0] !== undefined"
+                    :video-id="musics[0].vidId"
                     :player-parameters="plyerParam"
-                    :key="musicIndex"
                     ref="player"
                     @state-change="handleStateChange"
                 ></youtube-iframe>
@@ -90,6 +89,12 @@ export default defineComponent({
         const handleStateChange = (data: IIframeData): void => {
             if (data.data === 0) {
                 musicIndex.value = (musicIndex.value + 1) % musics.value.length;
+                player.value &&
+                    player.value.loadVideoById(
+                        musics.value[
+                            (musicIndex.value + 1) % musics.value.length
+                        ].vidId,
+                    );
             }
         };
         axios
@@ -139,6 +144,7 @@ export default defineComponent({
                 fs: 0,
                 modestbranding: 1,
                 controls: 0,
+                loop: musics.value.length === 1 ? 1 : 0,
             },
             handleStateChange,
             muted,
@@ -212,7 +218,6 @@ export default defineComponent({
             }
             &__title {
                 font-size: 1.5rem;
-                // width: calc(50vw - 3rem);
                 font-family: "Roboto Mono", monospace;
                 margin: 1rem;
                 text-align: center;
