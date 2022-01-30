@@ -180,7 +180,8 @@ export default defineComponent({
         flex-direction: row;
         justify-content: space-evenly;
         align-items: flex-start;
-        width: clamp(0px, 100vw, 1600px);
+        width: 100vw;
+        max-width: 1600px;
         margin-top: 2rem;
 
         .player {
