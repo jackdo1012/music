@@ -25,6 +25,13 @@
                 >
                     {{ musics[musicIndex].name }}
                 </div>
+                <div
+                    v-if="musics[musicIndex] !== undefined"
+                    class="player__artist"
+                    :key="musicIndex"
+                >
+                    {{ musics[musicIndex].artist }}
+                </div>
             </div>
             <div class="musics">
                 <div
@@ -138,6 +145,7 @@ export default defineComponent({
             plyerParam: {
                 autoplay: 1,
                 disablekb: 1,
+                mute: 1,
                 rel: 0,
                 fs: 0,
                 modestbranding: 1,
@@ -224,6 +232,13 @@ export default defineComponent({
             }
             &__title {
                 font-size: 1.5rem;
+                font-family: "Roboto Mono", monospace;
+                padding: 1rem;
+                text-align: center;
+                word-break: break-all;
+            }
+            &__artist {
+                font-size: 1.25rem;
                 font-family: "Roboto Mono", monospace;
                 padding: 1rem;
                 text-align: center;
@@ -385,6 +400,9 @@ export default defineComponent({
                 }
                 &__title {
                     font-size: 1.6rem;
+                }
+                &__artist {
+                    font-size: 1.35rem;
                 }
             }
             .musics {
