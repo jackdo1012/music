@@ -1,17 +1,12 @@
 <template>
     <div class="navbar">
-        <router-link class="navbar-item" to="/">Home</router-link>
+        <a class="navbar-item" href="/">Home</a>
         <router-link class="navbar-item" to="/music">Music</router-link>
         <router-link class="navbar-item" to="/artist">Artist</router-link>
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-    name: "Navbar",
-});
-</script>
+<script lang="ts" src="@/components/Navbar.ts"></script>
 
 <style scope lang="scss">
 @use "../assets/scss/variables";
@@ -31,9 +26,6 @@ export default defineComponent({
         color: colors.$dark-text-color;
         text-decoration: none;
         font-family: "Roboto Mono", monospace;
-        &.router-link-exact-active {
-            color: colors.$dark-primary-color !important;
-        }
         &:visited {
             color: colors.$dark-text-color;
             text-decoration: none;

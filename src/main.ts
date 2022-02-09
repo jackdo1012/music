@@ -1,6 +1,12 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import YoutubeIframe from "@techassi/vue-youtube-iframe";
 
-createApp(App).use(router).use(YoutubeIframe).mount("#app");
+const tag = document.createElement("script");
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName("script")[0];
+if (firstScriptTag !== null && firstScriptTag.parentNode !== null) {
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+}
+
+createApp(App).use(router).mount("#app");

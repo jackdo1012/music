@@ -10,20 +10,15 @@
                     <BIconVolumeMuteFill v-if="muted" />
                     <BIconVolumeUpFill v-else />
                 </div>
-                <youtube-iframe
-                    class="player__iframe"
-                    v-if="musics[0] !== undefined"
-                    :video-id="musics[0].vidId"
-                    :player-parameters="plyerParam"
-                    ref="player"
-                    @state-change="handleStateChange"
-                ></youtube-iframe>
+                <div class="player__iframe">
+                    <div id="player"></div>
+                </div>
                 <div
-                    v-if="musics[musicIndex] !== undefined"
+                    v-if="currentPlaying.name !== undefined"
                     class="player__title"
-                    :key="musicIndex"
+                    :key="currentPlaying"
                 >
-                    {{ musics[musicIndex].name }}
+                    {{ currentPlaying.name }}
                 </div>
             </div>
             <div class="musics">
@@ -55,103 +50,7 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onUnmounted } from "vue";
-import axios from "axios";
-import { IMusic } from "@/types/data";
-import { IError } from "@/types/error";
-import { BIconVolumeMuteFill, BIconVolumeUpFill } from "bootstrap-icons-vue";
-import { Player } from "@techassi/vue-youtube-iframe";
-import { serverUrl } from "@/app.config";
-
-interface IIframeData {
-    data: number;
-    target: HTMLIFrameElement;
-}
-
-export default defineComponent({
-    name: "Home",
-    components: {
-        BIconVolumeMuteFill,
-        BIconVolumeUpFill,
-    },
-    setup() {
-        const musics = ref<IMusic[]>([]);
-        const error = ref<IError>({
-            error: false,
-            message: "",
-        });
-        const windowWidth = ref<number>(window.innerWidth);
-        const musicIndex = ref<number>(0);
-        const muted = ref<boolean>(true);
-        const player = ref<typeof Player>();
-
-        const handleStateChange = (data: IIframeData): void => {
-            if (data.data === 0) {
-                const now = musicIndex.value;
-                const next = (now + 1) % musics.value.length;
-                musicIndex.value = next;
-                player.value &&
-                    player.value.loadVideoById(musics.value[next].vidId);
-            }
-        };
-        axios
-            .get<IMusic[]>(`${serverUrl}/musics`)
-            .then((data) => {
-                musics.value = data.data;
-            })
-            .catch((err) => {
-                if (
-                    err.response &&
-                    err.isAxiosError &&
-                    err.response.status === 404
-                ) {
-                    error.value = {
-                        error: true,
-                        message: "Musics not found",
-                    };
-                }
-            });
-        const handleResize = () => {
-            windowWidth.value = window.innerWidth;
-        };
-        const handleMuteUnmute = () => {
-            if (player.value) {
-                if (player.value.isMuted()) {
-                    player.value.unMute();
-                    player.value.setVolume(100);
-                    muted.value = false;
-                } else {
-                    player.value.mute();
-                    muted.value = true;
-                }
-            }
-        };
-        window.addEventListener("resize", handleResize);
-        onUnmounted(() => {
-            window.removeEventListener("resize", handleResize);
-        });
-        return {
-            musics,
-            error,
-            musicIndex,
-            plyerParam: {
-                autoplay: 1,
-                disablekb: 1,
-                rel: 0,
-                fs: 0,
-                modestbranding: 1,
-                controls: 0,
-                loop: musics.value.length === 1 ? 1 : 0,
-            },
-            handleStateChange,
-            muted,
-            player,
-            handleMuteUnmute,
-        };
-    },
-});
-</script>
+<script lang="ts" src="@/components/Home.ts"></script>
 
 <style lang="scss">
 @use "../assets/scss/colors";
