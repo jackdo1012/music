@@ -57,12 +57,12 @@
     </div>
 </template>
 
-<script lang="ts" src="@/components/Home.ts"></script>
+<script lang="ts" src="@/components/Home/Home.ts"></script>
 
 <style lang="scss">
-@use "../assets/scss/colors";
-@use "../assets/scss/variables";
-@use "../assets/scss/fonts";
+@use "../../assets/scss/colors";
+@use "../../assets/scss/variables";
+@use "../../assets/scss/fonts";
 
 .homepage {
     display: flex;

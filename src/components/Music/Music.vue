@@ -14,11 +14,11 @@
     </div>
 </template>
 
-<script lang="ts" src="@/components/Music.ts"></script>
+<script lang="ts" src="@/components/Music/Music.ts"></script>
 
 <style scoped lang="scss">
-@use "../assets/scss/variables";
-@use "../assets/scss/colors";
+@use "../../assets/scss/variables";
+@use "../../assets/scss/colors";
 
 .musics {
     .music {

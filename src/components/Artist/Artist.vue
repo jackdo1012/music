@@ -39,11 +39,11 @@
     </div>
 </template>
 
-<script lang="ts" src="@/components/Artist.ts"></script>
+<script lang="ts" src="@/components/Artist/Artist.ts"></script>
 
 <style scoped lang="scss">
-@use "../assets/scss/variables";
-@use "../assets/scss/colors";
+@use "../../assets/scss/variables";
+@use "../../assets/scss/colors";
 
 .artists {
     .artist-search {

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Home from "../components/Home.vue";
+import Home from "../components/Home/Home.vue";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -10,12 +10,12 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: "/music",
         name: "Music",
-        component: () => import("../components/Music.vue"),
+        component: () => import("../components/Music/Music.vue"),
     },
     {
         path: "/artist",
         name: "Artist",
-        component: () => import("../components/Artist.vue"),
+        component: () => import("../components/Artist/Artist.vue"),
     },
 ];
 
