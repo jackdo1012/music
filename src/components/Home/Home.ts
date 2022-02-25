@@ -78,53 +78,55 @@ export default defineComponent({
             window.removeEventListener("resize", handleResize);
         });
 
+        const updateMusic = (music: Message) => {
+            currentPlaying.value.name = JSON.parse(music.body).song.name;
+            if (player.value !== null && player.value !== undefined) {
+                player.value.loadVideoById(JSON.parse(music.body).song.vidId);
+            } else {
+                // eslint-disable-next-line
+                player.value = new (window as any).YT.Player("player", {
+                    width: 600,
+                    height: 400,
+                    videoId: JSON.parse(music.body).song.vidId,
+                    playerVars: {
+                        mute: 1,
+                        autoplay: 1,
+                        disablekb: 1,
+                        rel: 0,
+                        fs: 0,
+                        modestbranding: 1,
+                        controls: 0,
+                        start: JSON.parse(music.body).duration,
+                    },
+                    event: {
+                        onReady: ytVidOnReady,
+                    },
+                });
+            }
+        };
+
         // eslint-disable-next-line
         (window as any).onYouTubeIframeAPIReady = () => {
             const socket = new SockJS(`${serverUrl}/ws`);
             const stompClient = Stomp.over(socket, {
                 debug: false,
             });
+            // set stomp client username to session id
+
             stompClient.connect({}, () => {
                 stompClient.subscribe("/topic/updateTrack", () => {
                     updateList();
                 });
                 stompClient.subscribe(
+                    "/user/topic/playingVideo",
+                    (music: Message) => {
+                        updateMusic(music);
+                    },
+                );
+                stompClient.subscribe(
                     "/topic/playingVideo",
                     (music: Message) => {
-                        currentPlaying.value.name = JSON.parse(
-                            music.body,
-                        ).song.name;
-                        if (
-                            player.value !== null &&
-                            player.value !== undefined
-                        ) {
-                            player.value.loadVideoById(
-                                JSON.parse(music.body).song.vidId,
-                            );
-                        } else {
-                            // eslint-disable-next-line
-                            player.value = new (window as any).YT.Player(
-                                "player",
-                                {
-                                    width: 600,
-                                    height: 400,
-                                    videoId: JSON.parse(music.body).song.vidId,
-                                    playerVars: {
-                                        mute: 1,
-                                        autoplay: 1,
-                                        disablekb: 1,
-                                        rel: 0,
-                                        fs: 0,
-                                        modestbranding: 1,
-                                        controls: 0,
-                                        start: JSON.parse(music.body).duration,
-                                    },
-                                    event: {
-                                        onReady: ytVidOnReady,
-                                    },
-                                },
-                            );
-                        }
+                        updateMusic(music);
                     },
                 );
             });
