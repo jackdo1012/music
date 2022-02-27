@@ -111,7 +111,6 @@ export default defineComponent({
             const stompClient = Stomp.over(socket, {
                 debug: false,
             });
-            // set stomp client username to session id
 
             stompClient.connect({}, () => {
                 stompClient.subscribe("/topic/updateTrack", () => {

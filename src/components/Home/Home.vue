@@ -20,13 +20,6 @@
                 >
                     {{ currentPlaying.name }}
                 </div>
-                <div
-                    v-if="musics[musicIndex] !== undefined"
-                    class="player__artist"
-                    :key="musicIndex"
-                >
-                    {{ musics[musicIndex].artist }}
-                </div>
             </div>
             <div class="musics">
                 <div
@@ -36,11 +29,7 @@
                 >
                     <img
                         class="music__thumbnail"
-                        v-bind:src="
-                            'https://img.youtube.com/vi/' +
-                            music.vidId +
-                            '/0.jpg'
-                        "
+                        v-bind:src="music.thumbnail"
                         alt="music-thumbnail"
                     />
                     <div class="music__info">
@@ -167,7 +156,7 @@
                     &--title {
                         width: calc(
                             clamp(160px, 30vw, calc(1600px / 3)) - 2.5rem -
-                                (5rem * 1.33325)
+                                (5rem * 1.765432)
                         );
                         overflow: hidden;
                         font-size: 1.1rem;
@@ -176,7 +165,7 @@
                     &--artist {
                         width: calc(
                             clamp(160px, 30vw, calc(1600px / 3)) - 2.5rem -
-                                (5rem * 1.33325)
+                                (5rem * 1.765432)
                         );
                         overflow: hidden;
                         text-overflow: ellipsis;
@@ -267,12 +256,12 @@
                         height: 7rem;
                         &--title {
                             text-align: left;
-                            width: calc(90vw - 2.5rem - (7rem * 1.33325));
+                            width: calc(90vw - 2.5rem - (7rem * 1.765432));
                         }
 
                         &--artist {
                             text-align: left;
-                            width: calc(90vw - 2.5rem - (7rem * 1.33325));
+                            width: calc(90vw - 2.5rem - (7rem * 1.765432));
                         }
                     }
                 }
@@ -316,13 +305,13 @@
                         &--title {
                             text-align: left;
                             max-height: 4rem;
-                            width: calc(90vw - 2.5rem - (7rem * 1.33325));
+                            width: calc(90vw - 2.5rem - (7rem * 1.765432));
                         }
 
                         &--artist {
                             text-align: left;
                             max-height: 3rem;
-                            width: calc(90vw - 2.5rem - (7rem * 1.33325));
+                            width: calc(90vw - 2.5rem - (7rem * 1.765432));
                         }
                     }
                 }

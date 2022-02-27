@@ -145,6 +145,21 @@
         .artist {
             width: 70vw;
             margin-left: 15vw;
+            &__songs {
+                &--song {
+                    gap: 0.4rem;
+                    .song__clickable-img {
+                        height: 80px;
+                        &--thumbnail {
+                            height: 80px;
+                        }
+                    }
+                    .song__name {
+                        width: calc(80vw - 5rem - (80px * 1.765432));
+                    }
+                }
+            }
+
         }
     }
 }
@@ -166,7 +181,7 @@
                         }
                     }
                     .song__name {
-                        width: calc(80vw - 5rem - (80px * 1.33325));
+                        width: calc(80vw - 5rem - (80px * 1.765432));
                     }
                 }
             }

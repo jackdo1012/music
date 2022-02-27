@@ -1,9 +1,11 @@
 export interface IMusic {
-    artist: string;
     id: string;
     name: string;
     url: string;
+    artist: string;
     vidId: string;
+    duration: string;
+    thumbnail: string;
 }
 
 export interface IArtist {

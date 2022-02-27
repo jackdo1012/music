@@ -3,21 +3,21 @@
         <div
             class="navbar-item"
             v-bind:class="[currentRoute === '/' ? 'active' : '']"
-            :onClick="() => changeRoute('/')"
+            @click="changeRoute('/')"
         >
             Home
         </div>
         <div
             class="navbar-item"
             v-bind:class="[currentRoute === '/music' ? 'active' : '']"
-            :onClick="() => changeRoute('/music')"
+            @click="changeRoute('/music')"
         >
             Music
         </div>
         <div
             class="navbar-item"
             v-bind:class="[currentRoute === '/artist' ? 'active' : '']"
-            :onClick="() => changeRoute('/artist')"
+            @click="changeRoute('/artist')"
         >
             Artist
         </div>
